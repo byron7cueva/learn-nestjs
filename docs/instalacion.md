@@ -98,10 +98,72 @@ nest g service tasks --no-spec
 * No tienen ningun comportamiento, escpeto para almacenamiento, recuperación, serealización y deserealización de datos.
 * Puede ser usado para validación de datos.
 * No son una definición de un modelo. Este define la forma de datos para un caso específico.
-* Puede ser definido usando una interface o una clase. El enfoque recomendado es utilizar clases. LLa razón es que las interfaces son parte de TypeScript y, por lo tanto, no se conservan después de la compilación. Las clases nos permiten hacer más y, dado que son parte de javascript, se conservarán después de la compilación. NestJS no puede referirse a interfaces en tiempo de ejecución, pero puede referirse a clases.
+* Puede ser definido usando una interface o una clase. El enfoque recomendado es utilizar clases. La razón es que las interfaces son parte de TypeScript y, por lo tanto, no se conservan después de la compilación. Las clases nos permiten hacer más y, dado que son parte de javascript, se conservarán después de la compilación. NestJS no puede referirse a interfaces en tiempo de ejecución, pero puede referirse a clases.
 * Estos no son obligatorios, se puede desarrollar aplicaciones sin el uso de DTOs, sin embargo el valor que agregan hacen que valga la pena usarlos cuando corresponda.
 * Aplicar este patron tan pronto sea posible hace que sea fácil el mantenimiento y la refactorización de código.
-* 
+
+
+
+## Pipes
+
+* Opera sobre los argumentos procesados por el manejador de rutas, justo antes que el manejador sea llamado.
+* Puede realizar transformación y validación de datos.
+* Pueden retornar datos originales o modificados, los cuales seran pasados al manejador de rutas.
+* Pueden lanzar excepciones. Estas pueden ser manejadas por Nest.js y parseadas dentro de una respuesta con error.
+* Pueden ser asincronas.
+* Por defecto Nest.js viene con algunos pipes utiles dentro del paquete @nest/common module.
+
+### ValidationPipe
+
+* Valida la compatibilidad de un objeto completo con una clase. Si alguna propiedad no se puede mapear correctamente, la validación fallará.
+
+### ParseIntPipe
+
+* Por defecto los argumentos son string. Este pipe valida que un argumento es un número.
+* Si es exitoso, el argumento es transformado a un Number y pasado al Controlador.
+
+### Implementación de Pipes custom
+
+* Son clases anotadas con el decorador @Injectable().
+* Las pipes deben implementar la interface PipeTransform. Por lo tanto cada pipe debe tener a método transform(). Este método puede ser llamado por NestJS para procesar los argumentos.
+* El método transform() acepta dos parámetros:
+  * value: El valor del argumento procesado.
+  * metadata: (opcional): Un object que contiene la metadata del argumento.
+* Lo que sea devuelto por el método transform() será pasara al controlador. Las excepciones pueden ser devueltas al cliente.
+
+### Pipes a nivel de Controlador
+
+![image-20210810122456202](./img/pipe_handler_level.png)
+
+* Son definidos al nivel del controlador de la ruta, a través del decorador @UsePipes().
+* Los pipes puden ser consumidas en diferentes lugares. Dicha tubería procesara todos los parámetros para la solicitud entrante.
+* Requieren algo más de código, pero proporcinan grander beneficios No requieren código extra a nivel de parámetros.
+* Fáciles de matener y extender. Si el modelo de datos cambia, es fácil hacer los cambios necesarios solamente dentro del pipe.
+* La responsabilidad de identificar los argumentos a procesar se transfieren a un archivo central. El archivo del pipe.
+* Promueve el uso de DTOs, que es una buena préctica.
+
+### Pipes a nivel de parámetros:
+
+![image-20210810122610627](./img/parameter_pipe_level.png)
+
+* Sólo se procesará el parámetro específico para el que se ha específicado el pipe.
+* Tienden a ser mas ligeros y limpios. Sin embarg, ellos a menudo resultan agregar codigo extra a los controladores, esto puede volverse complicado y difícil de mantener.
+
+### Pipes Globales
+
+![image-20210810122703956](./img/global_pipe_level.png)
+
+* Son definidas a nivel de aplicación y serán aplicadas a cualquier solicitud entrante.
+
+**Create pipe**
+
+Add class validator and transformer
+
+```shell
+yarn add class-validator class-transformer
+```
+
+
 
 therefore - por lo tanto
 
@@ -110,3 +172,23 @@ however - sin embargo
 worthwhile - vale la pena
 
 across - a través
+
+any - cualquiera
+
+which - cuales
+
+which one - cual
+
+tend - tienden
+
+tend to be - tienden a ser
+
+however: sin embargo
+
+often - a menudo
+
+such - tal
+
+within - dentro de
+
+shifted - transferir
