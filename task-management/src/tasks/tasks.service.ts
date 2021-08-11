@@ -19,11 +19,11 @@ export class TasksService {
     let tasks = this.getAllTask();
 
     if (status) {
-      tasks = tasks.filter(task => task.status === status);
+      tasks = tasks.filter((task) => task.status === status);
     }
 
     if (search) {
-      tasks = tasks.filter(task => {
+      tasks = tasks.filter((task) => {
         if (task.title.includes(search) || task.description.includes(search)) {
           return true;
         }
@@ -40,7 +40,7 @@ export class TasksService {
     if (!found) {
       throw new NotFoundException(`Task with ID "${id}" not found`);
     }
-    
+
     return found;
   }
 
@@ -50,7 +50,7 @@ export class TasksService {
       id: uuid(),
       title,
       description,
-      status: TaskStatus.OPEN
+      status: TaskStatus.OPEN,
     };
 
     this.tasks.push(task);

@@ -163,6 +163,54 @@ Add class validator and transformer
 yarn add class-validator class-transformer
 ```
 
+## Instalation Postgres
+
+### Docker
+
+```shell
+# Iniciar
+docker run --name postgres-nest -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d postgres
+
+# Parar el contenedor
+docker container stop postgres-nest
+
+#Eliminar el contenedor
+docker container rm postgres-nest
+```
+
+## ORM (Object Relational Mapping)
+
+* Es una técnica que le permite consultar y manipular datos de una base de datos, utilizando un paradigma orientado a objetos.
+
+### Pros.
+
+* Escribir el modelo en un solo lugar, ayuda a ser más fácil el mantenimiento y menos repetición.
+* Muchas cosas echas automáticamente, como el manejo de la base de datos, tipos de datos, relaciones etc.
+* No necesitas escribir la sintaxis sql, fácil de aprender, difícil de dominar.
+* Abstracción de la base de datos, puedes cambiar el tipo de base de datos cuando tu lo desees.
+
+### Cons.
+
+* Las librerias ORM no son el camino simple, se debe aprender.
+* Tienen buen performance, pero es fácil descuidar este punto.
+* Hace fácil olvidar o no aprender lo que esta ocurriendo detrás de el ORM, llevándonos a un gran problema de mantenimiento.
+
+## TypeORM
+
+* Corre en Node.js y puede ser usada con TypeScript o JavaScript.
+* Ayuda a definir y administrar entidades, repositorios, columnas, relaciones, replicación, indices, queries, logging y mucho mas.
+
+### Instalar
+
+```shell
+yarn add typeorm @nestjs/typeorm pg
+```
+
+## Active Record vs Data Mapper
+
+* **Active Record:** Se define todo los métodos queries del modelo mismo y se guarda, remueve o carga objetos usando métodos del modelo. es un enfoque para acceder a su base de datos dentro de los modelos.
+* **Data Mapper:** Se define todos los métodos query en una clase separada llamada "Repositories", y guardar, remover y cargar objetos usando repositorios. Aquí las entidades son tontas, estas solamente definen sus propiedades y de ser posible algunos métodos dummy.
+
 
 
 therefore - por lo tanto
@@ -192,3 +240,31 @@ such - tal
 within - dentro de
 
 shifted - transferir
+
+that lets you - que le permite
+
+there are - existen
+
+that allow - que permiten
+
+rather than - en vez de
+
+lots of - mucho
+
+done - hechas (de hacer)
+
+wish - deseo
+
+leverages - apalanca
+
+achieve - lograr
+
+alright - esta bien
+
+neglect - descuidar
+
+behind - detrás
+
+behind the scenes - entre bastidores
+
+approach - enfoque
